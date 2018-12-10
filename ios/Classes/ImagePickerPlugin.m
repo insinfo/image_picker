@@ -153,12 +153,14 @@ static const int SOURCE_GALLERY = 1;
     NSNumber *maxWidth = [_arguments objectForKey:@"maxWidth"];
     NSNumber *maxHeight = [_arguments objectForKey:@"maxHeight"];
     NSNumber *quality = [_arguments objectForKey:@"quality"];
+    CGFloat qualityCompress = [quality floatValue];
+   // NSLog(@"%@", quality);
 
     if (maxWidth != (id)[NSNull null] || maxHeight != (id)[NSNull null]) {
       image = [self scaledImage:image maxWidth:maxWidth maxHeight:maxHeight];
     }
 
-    NSData *data = UIImageJPEGRepresentation(image,quality);
+    NSData *data = UIImageJPEGRepresentation(image,qualityCompress);
     NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
     NSString *tmpFile = [NSString stringWithFormat:@"image_picker_%@.jpg", guid];
     NSString *tmpDirectory = NSTemporaryDirectory();
